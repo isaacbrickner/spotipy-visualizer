@@ -38,6 +38,15 @@ def get_top_artists():
             "Error", f"Unable to fetch top artists: {response.status_code}"
         )
 
+def get_song_features():
+    response = requests.get("http://localhost:5000/songFeatures")
+    if response.ok:
+        display_json_in_frame(response.json())
+    else:
+        messagebox.showerror(
+            "Error", f"Unable to fetch song features: {response.status_code}"
+        )
+
 
 root = tk.Tk()
 root.title("API Control Panel")
@@ -45,8 +54,10 @@ root.geometry("800x600")
 
 top_tracks_button = tk.Button(root, text="Top Tracks", command=get_top_tracks)
 top_artists_button = tk.Button(root, text="Top Artists", command=get_top_artists)
+top_song_features = tk.Button(root, text="Song Features", command=get_song_features)
 
 top_tracks_button.pack(fill=tk.X, expand=True)
 top_artists_button.pack(fill=tk.X, expand=True)
+top_song_features.pack(fill=tk.X, expand=True)
 
 root.mainloop()
