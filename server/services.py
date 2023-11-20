@@ -1,22 +1,22 @@
 import spotipy
-from spotipy.oauth2 import SpotifyClientCredentials
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth
 import pprint
 import logging
-import datetime
 import numpy as np
 import pandas as pd
 import requests
-import asyncio
-import json
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 sp = spotipy.Spotify(
     auth_manager=SpotifyOAuth(
-        client_id="c6d8222701234542ab1296cb5a242c46",
-        client_secret="8800442a25954135b6c47a6696661602",
-        redirect_uri="http://127.0.0.1:9090",
-        scope="user-top-read user-library-read user-read-currently-playing user-follow-read user-read-playback-state user-modify-playback-state app-remote-control playlist-read-private",
+        client_id=os.getenv('CLIENT_ID'),
+        client_secret=os.getenv('CLIENT_SECRET'),
+        redirect_uri=os.getenv('REDIRECT_URI'),
+        scope=os.getenv('SCOPE'),
     )
 )
 results = sp.current_user_saved_tracks()

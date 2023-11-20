@@ -1,9 +1,5 @@
-from flask import Flask, jsonify, render_template, request, url_for, redirect
+from flask import Flask, jsonify
 from services import *
-import json
-import asyncio
-import pprint
-import os
 
 
 app = Flask(__name__)
