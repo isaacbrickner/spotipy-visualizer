@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, render_template
 from services import *
 
 
@@ -11,6 +11,9 @@ app = Flask(__name__)
 # TODO: get services from spotify API to return appropriate data
 # TODO: each time we query spotify ensure to add a datetime so that each entry(s) are different
 
+@app.route('/')
+def index():
+    return render_template('client/index.html')
 
 @app.route("/songFeatures")
 def create_data():
