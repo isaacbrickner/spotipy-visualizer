@@ -7,6 +7,7 @@ import logging
 import datetime
 import numpy as np
 import pandas as pd
+import requests
 import asyncio
 import json
 
@@ -45,7 +46,45 @@ def main():
     # generate_recommendations()
     # get_playlists()
     # listening_stats()
+    # average_energy()
+    # average_tempo()
+    avg_danceability()
+    avg_tempo()
+    avg_energy()
     pass
+
+def avg_danceability():
+    song_data = requests.get("http://localhost:5000/songFeatures")
+    song_data = song_data.json()
+    # pp.pprint(data.json())
+    if not song_data:
+        return None
+    danceability_values = [entry['danceability'] for entry in song_data]
+    average_danceability = sum(danceability_values) / len(danceability_values)
+    print(f"Average Danceability: {average_danceability}")
+    return average_danceability
+   
+def avg_tempo():
+    song_data = requests.get("http://localhost:5000/songFeatures")
+    song_data = song_data.json()
+    # pp.pprint(data.json())
+    if not song_data:
+        return None
+    tempo_values = [entry['tempo'] for entry in song_data]
+    average_tempo = sum(tempo_values) / len(tempo_values)
+    print(f"Average Tempo: {average_tempo}")
+    return average_tempo
+
+def avg_energy():
+    song_data = requests.get("http://localhost:5000/songFeatures")
+    song_data = song_data.json()
+    # pp.pprint(data.json())
+    if not song_data:
+        return None
+    energy_values = [entry['energy'] for entry in song_data]
+    average_energy = sum(energy_values) / len(energy_values)
+    print(f"Average Energy: {average_energy}")
+    return average_energy
 
 
 def create_data_for_song_features(tracks):
@@ -249,8 +288,8 @@ def listening_stats():
     df.to_csv(r"Data/listening_stats.csv", index=False, header=True)
 
 
-def average_danceability():
-    get_danceability = pd.read_csv("Data/song_features_data.csv")
+def average_danceability(song_feat):
+    get_danceability = song_feat
     avg_danceability = []
     for i, item in enumerate(get_danceability["danceability"]):
         tempo_val = get_danceability["danceability"][i]
@@ -260,8 +299,8 @@ def average_danceability():
     return _avg
 
 
-def average_tempo():
-    get_tempo = pd.read_csv("Data/song_features_data.csv")
+def average_tempo(song_feat):
+    get_tempo = song_feat
     avg_tempo = []
     for i, item in enumerate(get_tempo["tempo"]):
         tempo_val = get_tempo["tempo"][i]
@@ -271,8 +310,8 @@ def average_tempo():
     return _avg
 
 
-def average_energy():
-    get_energy = pd.read_csv("Data/song_features_data.csv")
+def average_energy(song_feat):
+    get_energy = song_feat
     avg_energy = []
     for i, item in enumerate(get_energy["energy"]):
         energy_val = get_energy["energy"][i]

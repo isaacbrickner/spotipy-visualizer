@@ -3,9 +3,6 @@ from tkinter import messagebox, scrolledtext
 import requests
 import json
 
-# this is the front end!
-
-
 def get_top_tracks():
     response = requests.get("http://localhost:5000/topTracks")
     if response.ok:
@@ -14,7 +11,6 @@ def get_top_tracks():
         messagebox.showerror(
             "Error", f"Unable to fetch top tracks: {response.status_code}"
         )
-
 
 def display_json_in_frame(json_data):
     top = tk.Toplevel()
@@ -27,7 +23,6 @@ def display_json_in_frame(json_data):
 
     text_area.insert(tk.INSERT, pretty_json)
     text_area.config(state="disabled")
-
 
 def get_top_artists():
     response = requests.get("http://localhost:5000/topArtists")
@@ -47,17 +42,27 @@ def get_song_features():
             "Error", f"Unable to fetch song features: {response.status_code}"
         )
 
-
 root = tk.Tk()
 root.title("API Control Panel")
 root.geometry("800x600")
 
-top_tracks_button = tk.Button(root, text="Top Tracks", command=get_top_tracks)
-top_artists_button = tk.Button(root, text="Top Artists", command=get_top_artists)
-top_song_features = tk.Button(root, text="Song Features", command=get_song_features)
+# Create a frame at the bottom to contain the buttons
+button_frame = tk.Frame(root)
+button_frame.place(relx=0.5, rely=0.9, anchor=tk.CENTER)
 
-top_tracks_button.pack(fill=tk.X, expand=True)
-top_artists_button.pack(fill=tk.X, expand=True)
-top_song_features.pack(fill=tk.X, expand=True)
+# Set uniform size for all buttons
+button_width = 15
+
+top_tracks_button = tk.Button(button_frame, text="Top Tracks", command=get_top_tracks, width=button_width)
+top_artists_button = tk.Button(button_frame, text="Top Artists", command=get_top_artists, width=button_width)
+top_song_features = tk.Button(button_frame, text="Song Features", command=get_song_features, width=button_width)
+
+title_label = tk.Label(root, text="Spotify Top Song Features Visualizer", font=("Helvetica", 16))
+title_label.place(relx=0.5, rely=0.1, anchor=tk.CENTER)
+
+# Pack buttons side by side with uniform width
+top_tracks_button.pack(side=tk.LEFT, padx=5)
+top_artists_button.pack(side=tk.LEFT, padx=5)
+top_song_features.pack(side=tk.LEFT, padx=5)
 
 root.mainloop()
