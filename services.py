@@ -1,15 +1,11 @@
 import spotipy
-from spotipy.oauth2 import SpotifyClientCredentials
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth
 import pprint
 import logging
-import datetime
 import numpy as np
 import pandas as pd
 import requests
-import asyncio
-import json
 
 sp = spotipy.Spotify(
     auth_manager=SpotifyOAuth(

@@ -1,9 +1,5 @@
-from flask import Flask, jsonify, render_template, request, url_for, redirect
+from flask import Flask, jsonify
 from services import *
-import json
-import asyncio
-import pprint
-import os
 
 
 app = Flask(__name__)
@@ -25,6 +21,15 @@ def create_data():
     for i in range(len(features)):
         features[i].update(names[i])
     return jsonify(features)
+
+@app.route("/getAveragesFromSongFeatures")
+def send_averages_data():
+    avg_data = {"average tempo": avg_tempo(),
+                "average energy": avg_energy(),
+                "average danceability": avg_danceability()
+                }
+    return avg_data
+    
 
 
 @app.route("/topTracks")

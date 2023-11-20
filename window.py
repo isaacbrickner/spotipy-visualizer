@@ -1,5 +1,8 @@
 import tkinter as tk
+from tkinter import ttk
 from tkinter import messagebox, scrolledtext
+import io
+from PIL import Image, ImageTk
 import requests
 import json
 
@@ -41,28 +44,41 @@ def get_song_features():
         messagebox.showerror(
             "Error", f"Unable to fetch song features: {response.status_code}"
         )
+        
+def get_avg_features():
+    response = requests.get("http://localhost:8000/graphOfAverages")
+    if response.status_code == 200:
+        img = Image.open(io.BytesIO(response.content))
+        img_tk = ImageTk.PhotoImage(img)
+        display_window = tk.Toplevel()
+        display_window.title("Matplotlib Plot in Tkinter")
+        label = ttk.Label(display_window, image=img_tk)
+        label.image = img_tk
+        label.pack()
+
+    else:
+        print(f"Failed to fetch the plot. Status code: {response.status_code}")
 
 root = tk.Tk()
-root.title("API Control Panel")
+root.title("Spotify Data Visualizer")
 root.geometry("800x600")
 
-# Create a frame at the bottom to contain the buttons
 button_frame = tk.Frame(root)
 button_frame.place(relx=0.5, rely=0.9, anchor=tk.CENTER)
 
-# Set uniform size for all buttons
 button_width = 15
 
 top_tracks_button = tk.Button(button_frame, text="Top Tracks", command=get_top_tracks, width=button_width)
 top_artists_button = tk.Button(button_frame, text="Top Artists", command=get_top_artists, width=button_width)
 top_song_features = tk.Button(button_frame, text="Song Features", command=get_song_features, width=button_width)
+avg_features = tk.Button(button_frame, text="Average Features", command=get_avg_features, width=button_width)
 
 title_label = tk.Label(root, text="Spotify Top Song Features Visualizer", font=("Helvetica", 16))
 title_label.place(relx=0.5, rely=0.1, anchor=tk.CENTER)
 
-# Pack buttons side by side with uniform width
 top_tracks_button.pack(side=tk.LEFT, padx=5)
 top_artists_button.pack(side=tk.LEFT, padx=5)
 top_song_features.pack(side=tk.LEFT, padx=5)
+avg_features.pack(side=tk.LEFT, padx=5)
 
 root.mainloop()
