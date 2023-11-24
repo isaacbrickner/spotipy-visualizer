@@ -23,6 +23,7 @@ def create_data():
     features = get_song_features(ids)
     for i in range(len(features)):
         features[i].update(names[i])
+    print(features)
     return jsonify(features)
 
 
