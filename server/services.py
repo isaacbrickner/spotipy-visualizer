@@ -210,7 +210,7 @@ def get_track_name(ids):
         }
         track_array.append(tracks_ids)
 
-    print(track_array)
+    # print(track_array)
     return track_array
 
 

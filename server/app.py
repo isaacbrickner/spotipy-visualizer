@@ -1,8 +1,11 @@
-from flask import Flask, jsonify, render_template
+from flask import Flask, jsonify, render_template, request
+from flask_cors import CORS, cross_origin
 from services import *
 
 
 app = Flask(__name__)
+cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type', 'Access-Control-Allow-Private-Network: true'
 
 # TODO: https://www.digitalocean.com/community/tutorials/how-to-use-flask-sqlalchemy-to-interact-with-databases-in-a-flask-application
 # TODO: https://developer.spotify.com/documentation/web-api/reference/get-several-audio-features
@@ -15,7 +18,7 @@ app = Flask(__name__)
 def index():
     return render_template('client/index.html')
 
-@app.route("/songFeatures")
+@app.route('/songFeatures', methods=['GET'])
 def create_data():
     artists = get_top_tracks()
     ids = create_data_for_song_features(artists)
