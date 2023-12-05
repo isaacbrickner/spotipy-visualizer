@@ -5,7 +5,10 @@ from services import *
 
 app = Flask(__name__)
 cors = CORS(app)
-app.config['CORS_HEADERS'] = 'Content-Type', 'Access-Control-Allow-Private-Network: true'
+app.config["CORS_HEADERS"] = (
+    "Content-Type",
+    "Access-Control-Allow-Private-Network: true",
+)
 
 # TODO: https://www.digitalocean.com/community/tutorials/how-to-use-flask-sqlalchemy-to-interact-with-databases-in-a-flask-application
 # TODO: https://developer.spotify.com/documentation/web-api/reference/get-several-audio-features
@@ -14,11 +17,13 @@ app.config['CORS_HEADERS'] = 'Content-Type', 'Access-Control-Allow-Private-Netwo
 # TODO: get services from spotify API to return appropriate data
 # TODO: each time we query spotify ensure to add a datetime so that each entry(s) are different
 
-@app.route('/')
-def index():
-    return render_template('client/index.html')
 
-@app.route('/songFeatures', methods=['GET'])
+@app.route("/")
+def index():
+    return render_template("client/index.html")
+
+
+@app.route("/songFeatures", methods=["GET"])
 def create_data():
     artists = get_top_tracks()
     ids = create_data_for_song_features(artists)

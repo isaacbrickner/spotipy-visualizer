@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+#sh1 {
+    text-align: center; 
+}
+
+#songFeaturesTable {
+    width: fit-content;
+    height: 200px;
+    width: 60%;
+}
+
+#chartOne {
+    width: fit-content;
+    height: 200px;
+    width: 50%;
+}
+
+#navigationLinks {
+    margin-top: 3px;
+}
+
+#h1MainMenu {
+    
+}
+
+#mainDiv {
+    /* text-align: center; */
+    border: 3px solid green;
+}
+
+.container {
+    padding: 5px;
+
+}

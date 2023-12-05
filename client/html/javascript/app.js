@@ -1,29 +1,7 @@
 
-let featuresButton = document.getElementById('songFeatures')
-const tableBody = document.getElementById('tableBody')
+const featuresButton = document.getElementById('featuresLink')
+const tableBody = document.getElementById('appBody')
 featuresButton.addEventListener("click", getSongFeatures)
-
-const ctx = document.getElementById('myChart');
-
-  new Chart(ctx, {
-    type: 'bar',
-    data: {
-      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-      datasets: [{
-        label: '# of Votes',
-        data: [12, 19, 3, 5, 2, 3],
-        borderWidth: 1
-      }]
-    },
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true
-        }
-      }
-    }
-  });
-
 
 async function getSongFeatures() {
   await fetch("http://localhost:5000/songFeatures")
@@ -70,9 +48,9 @@ async function getSongFeatures() {
           instrumentalness.textContent = song.instrumentalness
           row.appendChild(instrumentalness)
 
-          const livliness = document.createElement('td')
-          livliness.textContent = song.livliness
-          row.appendChild(livliness)
+          const liveness = document.createElement('td')
+          liveness.textContent = song.liveness
+          row.appendChild(liveness)
 
           const valence = document.createElement('td')
           valence.textContent = song.valence
@@ -84,5 +62,6 @@ async function getSongFeatures() {
 
           tableBody.appendChild(row)
       })
-    })}
+    }
+    )}
 
