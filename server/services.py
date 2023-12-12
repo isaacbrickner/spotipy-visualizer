@@ -13,10 +13,10 @@ load_dotenv()
 
 sp = spotipy.Spotify(
     auth_manager=SpotifyOAuth(
-        client_id=os.getenv('CLIENT_ID'),
-        client_secret=os.getenv('CLIENT_SECRET'),
-        redirect_uri=os.getenv('REDIRECT_URI'),
-        scope=os.getenv('SCOPE'),
+        client_id=os.getenv("CLIENT_ID"),
+        client_secret=os.getenv("CLIENT_SECRET"),
+        redirect_uri=os.getenv("REDIRECT_URI"),
+        scope=os.getenv("SCOPE"),
     )
 )
 results = sp.current_user_saved_tracks()
@@ -29,7 +29,6 @@ analysis = sp.audio_analysis(
 )
 
 pp = pprint.PrettyPrinter(indent=4)
-
 
 logger = logging.getLogger("examples.artist_recommendations")
 logging.basicConfig(level="INFO")
@@ -48,32 +47,61 @@ def main():
     # listening_stats()
     # average_energy()
     # average_tempo()
-    avg_danceability()
-    avg_tempo()
-    avg_energy()
+    # avg_danceability()
+    # avg_tempo()
+    # avg_energy()
+    # find_attribute()
     pass
+
+
+def find_song_features():
+    artists = get_top_tracks()
+    ids = create_data_for_song_features(artists)
+    names = get_track_name(ids)
+    features = get_song_features(ids)
+    for i in range(len(features)):
+        features[i].update(names[i])
+    return features
+
+
+def find_attribute(request):
+    data = find_song_features()
+    desired_keys = []
+    result = [{key: d[key] for key in desired_keys} for d in data]
+    pp.pprint(result)
+    return result
+
+
+def find_acousticness():
+    data = find_song_features()
+    desired_keys = ["acousticness", "song_name"]
+    result = [{key: d[key] for key in desired_keys} for d in data]
+    pp.pprint(result)
+    return result
+
 
 def avg_danceability():
     song_data = requests.get("http://localhost:5000/songFeatures")
     song_data = song_data.json()
-    # pp.pprint(data.json())
     if not song_data:
         return None
-    danceability_values = [entry['danceability'] for entry in song_data]
+    danceability_values = [entry["danceability"] for entry in song_data]
     average_danceability = sum(danceability_values) / len(danceability_values)
     print(f"Average Danceability: {average_danceability}")
     return average_danceability
-   
+
+
 def avg_tempo():
     song_data = requests.get("http://localhost:5000/songFeatures")
     song_data = song_data.json()
     # pp.pprint(data.json())
     if not song_data:
         return None
-    tempo_values = [entry['tempo'] for entry in song_data]
+    tempo_values = [entry["tempo"] for entry in song_data]
     average_tempo = sum(tempo_values) / len(tempo_values)
     print(f"Average Tempo: {average_tempo}")
     return average_tempo
+
 
 def avg_energy():
     song_data = requests.get("http://localhost:5000/songFeatures")
@@ -81,7 +109,7 @@ def avg_energy():
     # pp.pprint(data.json())
     if not song_data:
         return None
-    energy_values = [entry['energy'] for entry in song_data]
+    energy_values = [entry["energy"] for entry in song_data]
     average_energy = sum(energy_values) / len(energy_values)
     print(f"Average Energy: {average_energy}")
     return average_energy

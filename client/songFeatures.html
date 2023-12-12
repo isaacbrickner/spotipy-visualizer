@@ -36,9 +36,20 @@
         </div>
       </div>
     </nav>
-    <div class="container" id="chartOne">
-      <canvas id="myChart"></canvas>
+    <div class="container text-center">
+      <div class="btn-group" role="group" aria-label="Basic outlined example">
+        <button onclick="danceabilityButton()" id="danceabilityButton" type="button" class="btn btn-outline-primary">Danceability</button>
+        <button type="button" class="btn btn-outline-primary" onclick="energyButton()" id="energyButton">Energy</button>
+        <button type="button" class="btn btn-outline-primary">Liveness</button>
+      </div>
     </div>
+    
+    <div id="chartContainer" class="container">
+      <div id="chartOfAttributes">
+      <canvas id="attributeChart" width="1000"></canvas>
+    </div>
+  </div>
+    
   <!--  <button id="button" onclick="getSongFeatures()">Click me for song features</button>
     <p id="songFeatures">song features will be here...</p>
     <div class="container" id="featuresDiv">

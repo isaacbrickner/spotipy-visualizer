@@ -1,7 +1,23 @@
+import * as Charts from 'chart.js'
 
-const featuresButton = document.getElementById('featuresLink')
-const tableBody = document.getElementById('appBody')
-featuresButton.addEventListener("click", getSongFeatures)
+
+document.addEventListener('DOMContentLoaded', () => {
+  // Your JavaScript code here
+  document.getElementById('energyButton').addEventListener("click", energyButton)
+  const featuresButton = document.getElementById('featuresLink')
+  const tableBody = document.getElementById('appBody')
+  featuresButton.addEventListener("click", getSongFeatures)
+  document.getElementById('energyButton').addEventListener("click", energyButton)
+
+})
+
+
+async function energyButton() {
+  const html = document.getElementById('chartOfAttributes')
+  html.innerHTML = '<canvas id="energyChart" width="1000"></canvas>'
+  Charts.createEnergyChart()
+}
+
 
 async function getSongFeatures() {
   await fetch("http://localhost:5000/songFeatures")
