@@ -24,14 +24,14 @@ def index():
     return render_template("client/index.html")
 
 
-@app.route("/songFeatures", methods=["GET"])
-def create_data():
-    return jsonify(find_song_features())
+# @app.route("/songFeatures", methods=["GET"])
+# def create_data():
+#     return jsonify(find_song_features())
 
 
-# @app.route("/danceability", methods=["GET"])
-# def show_danceability():
-#     return jsonify(find_danceability())
+@app.route("/danceability", methods=["GET"])
+def show_danceability():
+    return jsonify(find_danceability())
 
 
 @app.route("/topTracks")
