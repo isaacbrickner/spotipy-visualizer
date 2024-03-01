@@ -1,4 +1,5 @@
 from flask import Flask, jsonify, render_template, request
+from pprint import *
 from flask_cors import CORS, cross_origin
 from services import *
 import json
@@ -24,16 +25,14 @@ def index():
     return render_template("client/index.html")
 
 
-@app.route("/songFeatures", methods=["GET"])
-def create_data():
-    artists = get_top_tracks()
-    ids = create_data_for_song_features(artists)
-    names = get_track_name(ids)
-    features = get_song_features(ids)
-    for i in range(len(features)):
-        features[i].update(names[i])
-    print(features)
-    return jsonify(features)
+# @app.route("/songFeatures", methods=["GET"])
+# def create_data():
+#     return jsonify(find_song_features())
+
+
+@app.route("/danceability", methods=["GET"])
+def show_danceability():
+    return jsonify(find_danceability())
 
 
 @app.route("/topTracks")
