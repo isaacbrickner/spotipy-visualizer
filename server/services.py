@@ -13,10 +13,10 @@ load_dotenv()
 
 sp = spotipy.Spotify(
     auth_manager=SpotifyOAuth(
-        client_id=os.getenv('CLIENT_ID'),
-        client_secret=os.getenv('CLIENT_SECRET'),
-        redirect_uri=os.getenv('REDIRECT_URI'),
-        scope=os.getenv('SCOPE'),
+        client_id=os.getenv("CLIENT_ID"),
+        client_secret=os.getenv("CLIENT_SECRET"),
+        redirect_uri=os.getenv("REDIRECT_URI"),
+        scope=os.getenv("SCOPE"), requests_timeout=30
     )
 )
 results = sp.current_user_saved_tracks()
@@ -53,27 +53,30 @@ def main():
     avg_energy()
     pass
 
+
 def avg_danceability():
     song_data = requests.get("http://localhost:5000/songFeatures")
     song_data = song_data.json()
     # pp.pprint(data.json())
     if not song_data:
         return None
-    danceability_values = [entry['danceability'] for entry in song_data]
+    danceability_values = [entry["danceability"] for entry in song_data]
     average_danceability = sum(danceability_values) / len(danceability_values)
     print(f"Average Danceability: {average_danceability}")
     return average_danceability
-   
+
+
 def avg_tempo():
     song_data = requests.get("http://localhost:5000/songFeatures")
     song_data = song_data.json()
     # pp.pprint(data.json())
     if not song_data:
         return None
-    tempo_values = [entry['tempo'] for entry in song_data]
+    tempo_values = [entry["tempo"] for entry in song_data]
     average_tempo = sum(tempo_values) / len(tempo_values)
     print(f"Average Tempo: {average_tempo}")
     return average_tempo
+
 
 def avg_energy():
     song_data = requests.get("http://localhost:5000/songFeatures")
@@ -81,7 +84,7 @@ def avg_energy():
     # pp.pprint(data.json())
     if not song_data:
         return None
-    energy_values = [entry['energy'] for entry in song_data]
+    energy_values = [entry["energy"] for entry in song_data]
     average_energy = sum(energy_values) / len(energy_values)
     print(f"Average Energy: {average_energy}")
     return average_energy

@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+    <link rel="stylesheet" type="text/css" href="/css"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  </head>
+  <body>
+   <nav class="navbar navbar-expand-lg navbar-light bg-light justify-content-center">
+      <div id="navbar" class="container-fluid">
+        <svg id="spotifyLogo" xmlns="http://www.w3.org/2000/svg" width="20" height="16" fill="currentColor" class="bi bi-spotify" viewBox="2 0 16 16">
+          <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0m3.669 11.538a.498.498 0 0 1-.686.165c-1.879-1.147-4.243-1.407-7.028-.77a.499.499 0 0 1-.222-.973c3.048-.696 5.662-.397 7.77.892a.5.5 0 0 1 .166.686zm.979-2.178a.624.624 0 0 1-.858.205c-2.15-1.321-5.428-1.704-7.972-.932a.625.625 0 0 1-.362-1.194c2.905-.881 6.517-.454 8.986 1.063a.624.624 0 0 1 .206.858m.084-2.268C10.154 5.56 5.9 5.419 3.438 6.166a.748.748 0 1 1-.434-1.432c2.825-.857 7.523-.692 10.492 1.07a.747.747 0 1 1-.764 1.288z"/>
+        </svg>
+        <a class="navbar-brand mx-auto" href="#"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div id="navigationLinks" class="collapse navbar-collapse">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Top Artists</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Top Songs</a>
+            </li>
+            <li class="nav-item">
+              <a id="featuresLink" class="nav-link" href="songFeatures.html">Listening Analysis</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div  class="container text-center p-2">
+      <div id="appBody" class="row justify-content-lg-center">
+        <div class="col col-lg-12 p-3">
+          <h1>Spotify Data Visualizer</h1>
+        <div class="col col-lg-12 p-1">
+          <h3>How it Works</h3>
+            <p>Hello! This application is intended to give you insight in to your monthly music habits on Spotify. You can dive into the finer details of your top artists, tracks, and song attributes for a time period of 30 days.</p>
+          </div>
+          </div>
+        <hr> </hr>
+        <div class="container text-center p-2">
+          <div class="row">
+            <div class="col">
+              <h4>Top Artists and Top Tracks</h4>
+              <p>This is a list of your top 20 Spotify artists and tracks from the past 30 days.</p>
+            </div>
+
+            <!-- {% comment %} <div id="accordion">
+              <div class="card">
+                <div class="card-header" id="headingOne">
+                  <h5 class="mb-0">
+                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                      Audio Features
+                    </button>
+                  </h5>
+                </div> {% endcomment %} -->
+            <hr> </hr>
+              <div class="container text-center p-3">
+                  <h4>Feature Analysis</h4>
+              <p>This section is an analysis and visualization of the features on your top 20 Spotify tracks. </p>
+              <div class="container text-center mt-5">
+                <ul class="list">
+                  <li class="list-group-item"><strong>acousticness:</strong> A confidence measure from 0.0 to 1.0 of whether the track is acoustic. 1.0 represents high confidence the track is acoustic. Range: 0 - 1. <strong>Example: 0.00242</strong></li><br>
+                  
+                  <li class="list-group-item"><strong>analysis_url:</strong> A URL to access the full audio analysis of this track. An access token is required to access this data. <br><strong>Example:</strong> "https://api.spotify.com/v1/audio-analysis/2takcwOaAZWiXQijPHIx7B"</li></ul><br>
+                  
+                  <li class="list-group-item"><strong>danceability:</strong> Danceability describes how suitable a track is for dancing based on a combination of musical elements including tempo, rhythm stability, beat strength, and overall regularity. A value of 0.0 is least danceable and 1.0 is most danceable. </br><strong>Example:</strong> 0.585</li><br>
+                  
+                  <li class="list-group-item"><strong>duration_ms:</strong> The duration of the track in milliseconds. <br><strong>Example:</strong> 237040</li><br>
+                  
+                  <li class="list-group-item"><strong>energy:</strong> Energy is a measure from 0.0 to 1.0 and represents a perceptual measure of intensity and activity. Typically, energetic tracks feel fast, loud, and noisy. <br><strong>Example:</strong> 0.842</li><br>
+                  
+                  <li class="list-group-item"><strong>id:</strong> The Spotify ID for the track. <br><strong>Example:</strong> "2takcwOaAZWiXQijPHIx7B"</li><br>
+                  
+                  <li class="list-group-item"><strong>instrumentalness:</strong> Predicts whether a track contains no vocals. "Ooh" and "aah" sounds are treated as instrumental in this context. <br><strong>Example:</strong> 0.00686</li><br>
+                  
+                  <li class="list-group-item"><strong>key:</strong> The key the track is in. Integers map to pitches using standard Pitch Class notation. <br><strong>Example:</strong> 9</li><br>
+                  
+                  <li class="list-group-item"><strong>liveness:</strong> Detects the presence of an audience in the recording. <br><strong>Example:</strong> 0.0866</li><br>
+                  
+                  <li class="list-group-item"><strong>loudness:</strong> The overall loudness of a track in decibels (dB). <br><strong>Example:</strong> -5.883</li><br>
+                  
+                  <li class="list-group-item"><strong>mode:</strong> Mode indicates the modality (major or minor) of a track. <br><strong>Example:</strong> 0</li><br>
+                  
+                  <li class="list-group-item"><strong>speechiness:</strong> Speechiness detects the presence of spoken words in a track. <br><strong>Example:</strong> 0.0556</li><br>
+                  
+                  <li class="list-group-item"><strong>tempo:</strong> The overall estimated tempo of a track in beats per minute (BPM). <br><strong>Example:</strong> 118.211</li><br>
+                  
+                  <li class="list-group-item"><strong>time_signature:</strong> An estimated time signature. <br><strong>Example:</strong> 4</li><br>
+                  
+                  <li class="list-group-item"><strong>track_href:</strong> A link to the Web API endpoint providing full details of the track. <br><strong>Example:</strong> "https://api.spotify.com/v1/tracks/2takcwOaAZWiXQijPHIx7B"</li><br>
+                  
+                  <li class="list-group-item"><strong>valence:</strong> A measure from 0.0 to 1.0 describing the musical positiveness conveyed by a track. Range: 0 - 1. <br><strong>Example:</strong> 0.428</li>
+              </ul>
+            </div>
+                </div>
+              </div>
+
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/src/javascript/app.js"></script>
+    <script src="/src/javascript/charts.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  </body>
+</html>
+

@@ -1,6 +1,7 @@
 from flask import Flask, jsonify, render_template, request
 from flask_cors import CORS, cross_origin
 from services import *
+import json
 
 
 app = Flask(__name__)
@@ -13,7 +14,7 @@ app.config["CORS_HEADERS"] = (
 # TODO: https://www.digitalocean.com/community/tutorials/how-to-use-flask-sqlalchemy-to-interact-with-databases-in-a-flask-application
 # TODO: https://developer.spotify.com/documentation/web-api/reference/get-several-audio-features
 # TODO: fix services for getting Spotify API data
-# TODO: create database and models
+# TODO: create database and models 
 # TODO: get services from spotify API to return appropriate data
 # TODO: each time we query spotify ensure to add a datetime so that each entry(s) are different
 
